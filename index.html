@@ -39,19 +39,31 @@
    </div>
  <script>
    $( document ).ready(() => {
-        $(".submit").on('click', (event)=>{
+    
+        $(".submit").click((event)=>{
+
              //Prevent Default Submit Function
              event.preventDefault(); 
-          
+
+             //Get new posted message
+             let newMessage = {
+                 'name': $('#name').val(),
+                 'message':  $('#message').val()
+             };
+             
+             //Post message to the server
+             postMessage(newMessage)
+     
+           })
+             //Get messages from Server
              getMessages()
           //    addMessages({name: "Adeyemi", message: "This is me"})
-        })
-     
     
-});
+     });
+
 //Append message to messages
 const addMessages = (message) =>{
-    $("#messages").append(`<h4 class="userName"> ${message.name} </h4> <p> ${message.message}</p>`)
+    $("#messages").prepend(`<h4 class="userName"> ${message.name} </h4> <p> ${message.message}</p>`)
 }
 
 //Get messages from the backend
@@ -60,10 +72,13 @@ const getMessages = () => {
             
      data.forEach(item =>{  addMessages(item)})
         
-   })
-     
+   })     
 }
 
+//Post Message to the server
+const postMessage = (message)=>{
+     $.post('http://localhost:3000/messages', message)
+}
 
  </script>
     <!-- Optional JavaScript -->
