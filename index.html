@@ -29,7 +29,7 @@
                <label for="message"></label>
                <textarea type="text" name= "message" id="message" row="4" placeholder="Message"></textarea>
 
-               <button type="submit" class="btn btn-primary mb-2 sumbit" name="sumbit">Submit</button>
+               <button type="submit" class="btn btn-primary mb-2 submit" name="submit">Submit</button>
                
           </form>
         </div>
@@ -39,11 +39,29 @@
    </div>
  <script>
    $( document ).ready(() => {
-     addMessages({name: "Adeyemi", message: "This is me"})
+        $(".submit").on('click', (event)=>{
+             //Prevent Default Submit Function
+             event.preventDefault(); 
+          
+             getMessages()
+          //    addMessages({name: "Adeyemi", message: "This is me"})
+        })
+     
     
 });
-function addMessages(message){
+//Append message to messages
+const addMessages = (message) =>{
     $("#messages").append(`<h4 class="userName"> ${message.name} </h4> <p> ${message.message}</p>`)
+}
+
+//Get messages from the backend
+const getMessages = () => {
+   $.get('http://localhost:3000/messages', (data)=>{
+            
+     data.forEach(item =>{  addMessages(item)})
+        
+   })
+     
 }
 
 
