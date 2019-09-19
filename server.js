@@ -7,6 +7,8 @@ const axios = require('axios')
 const moment = require('moment')
 const bodyparser = require('body-parser')
 const app = express();
+const http = require('http').Server(app)
+const io = require('socket.io')(http)
 
 //Set Port Number
 const PORT = 3000;process.env.PORT || 3000
@@ -32,14 +34,18 @@ app.post('/messages', (req, res) => {
      let message = req.body;
      if(message.name  && message.message){
           messages.push(message)
+          io.emit('message', req.body)
           res.sendStatus(200)
      }    
 
 })
 
-console.log(messages.length)
+
+io.on('connection', (socket) =>{
+     console.log('connected')
+})
 //Listen to server
-app.listen(PORT, ()=>{
+http.listen(PORT, ()=>{
      console.log(`Server listen to port ${PORT}`)
 })
 
