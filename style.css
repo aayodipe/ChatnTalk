@@ -1,0 +1,37 @@
+html{
+box-sizing: border-box;
+}
+
+*, *::before, **::after{
+ box-sizing: inherit
+}
+
+body{
+     margin:50px auto;
+     padding:0;
+     width:960px;
+     height: 500px;
+     
+}
+
+.container{
+width:500px;
+height:00px;
+margin:10px auto;
+}
+
+#message, #name{
+border-color: blue;
+border-radius: 10px;
+width:400px;
+
+}
+#message{
+          height:100px;
+}
+
+.sumbit{
+     margin-left:150px;
+     margin-top:20px;
+     justify-content: center;
+}
