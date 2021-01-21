@@ -27,6 +27,6 @@
     "lodash": "^4.17.15",
     "moments": "0.0.2",
     "nodemon": "^1.19.2",
-    "socket.io": "^2.2.0"
+    "socket.io": "^2.4.0"
   }
 }
